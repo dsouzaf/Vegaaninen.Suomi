@@ -4,196 +4,287 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Your Website</title>
+<title>Vegaaninen Suomi - Vegan Finland</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:#f5f7fa;
-    color:#333;
+body {
+    background: #f5f7fa;
+    color: #333;
 }
 
-header{
-    background:#137e3d;
-    color:white;
-    padding:50px 20px;
-    text-align:center;
+/* --- Language Toggle Styles --- */
+body.lang-en .fi { display: none !important; }
+body.lang-fi .en { display: none !important; }
+
+.lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
 }
 
-header img{
-    width:120px;
-    height:120px;
-    border-radius:100%;
-    background:#137e3d;
-    padding:0px;
+.lang-switch button {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.lang-switch button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lang-switch button.active {
+    background: white;
+    color: #137e3d;
+}
+/* ----------------------------- */
+
+header {
+    background: #137e3d;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+    position: relative; /* Added for absolute positioning of the toggle */
+}
+
+header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    background: #137e3d;
+    padding: 0px;
 }
     
-header h1{
-    margin-top:20px;
-    font-size:42px;
+header h1 {
+    margin-top: 20px;
+    font-size: 42px;
 }
 
-header p{
-    margin-top:15px;
-    font-size:20px;
-    max-width:700px;
-    margin-left:auto;
-    margin-right:auto;
+header p {
+    margin-top: 15px;
+    font-size: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:auto;
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
 }
 
-.section{
-    padding:60px 0;
+.section {
+    padding: 60px 0;
 }
 
-.cards{
-    display:flex;
-    flex-wrap:wrap;
-    gap:25px;
-    justify-content:center;
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
 }
 
-.card{
-    background:white;
-    width:300px;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
+.card {
+    background: white;
+    width: 300px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
 }
 
-.card h3{
-    margin-bottom:15px;
+.card h3 {
+    margin-bottom: 15px;
 }
 
-.download{
-    text-align:center;
-    padding:60px 20px;
+.download {
+    text-align: center;
+    padding: 60px 20px;
 }
 
-.download h2{
-    margin-bottom:20px;
+.download h2 {
+    margin-bottom: 20px;
 }
 
-.download button{
-    background:#137e3d;
-    color:white;
-    border:none;
-    padding:18px 45px;
-    font-size:20px;
-    border-radius:8px;
-    cursor:pointer;
+.download button {
+    background: #137e3d;
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.download button:hover{
-    background:#137e3d;
+.download button:hover {
+    background: #0f632f; /* Slightly darker green on hover */
 }
 
-footer{
-    background:#222;
-    color:white;
-    text-align:center;
-    padding:30px;
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    line-height: 1.6;
 }
 
-@media(max-width:700px){
+@media(max-width: 700px){
+    header h1 {
+        font-size: 32px;
+    }
 
-header h1{
-font-size:32px;
-}
+    header p {
+        font-size: 18px;
+    }
 
-header p{
-font-size:18px;
-}
-
-.card{
-width:100%;
-}
-
+    .card {
+        width: 100%;
+    }
+    
+    .lang-switch {
+        top: 10px;
+        right: 10px;
+    }
 }
 </style>
 
 </head>
 
-<body>
+<!-- Default language is set to English (lang-en) -->
+<body class="lang-en">
 
 <header>
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+        <button onclick="setLanguage('en')" id="btn-en" class="active">EN</button>
+        <button onclick="setLanguage('fi')" id="btn-fi">FI</button>
+    </div>
 
-<img src="Vegaaninen Suomi Logo (1).png" alt="Logo">
+    <img src="Vegaaninen Suomi Logo (1).png" alt="Logo">
 
-<h1>Vegaaninen Suomi - Vegan Finland</h1>
+    <!-- The title stays the same for both -->
+    <h1>Vegaaninen Suomi - Vegan Finland</h1>
 
-<p>
-Welcome to our resource centre. Download useful tips,
-information, guides, leaflets, posters and tools completely free.
-</p>
+    <p class="en">
+        Welcome to our resource centre. Download useful tips,
+        information, guides, leaflets, posters and tools completely free.
+    </p>
+    <p class="fi">
+        Tervetuloa resurssikeskukseemme. Lataa hyödyllisiä vinkkejä,
+        tietoa, oppaita, esitteitä, julisteita ja työkaluja täysin ilmaiseksi.
+    </p>
 
 </header>
 
 <div class="container">
 
-<section class="section">
+    <section class="section">
 
-<div class="cards">
+        <div class="cards">
 
-<div class="card">
-<h3>Downloadable Guides</h3>
-<p>
-Download guides, tips, suggestions, toolkits, leaflets with a single click.
-</p>
-</div>
+            <div class="card">
+                <h3 class="en">Downloadable Guides</h3>
+                <h3 class="fi">Ladattavat oppaat</h3>
+                
+                <p class="en">
+                    Download guides, tips, suggestions, toolkits, leaflets with a single click.
+                </p>
+                <p class="fi">
+                    Lataa oppaita, vinkkejä, ehdotuksia, työkalupakkeja ja esitteitä yhdellä napsautuksella.
+                </p>
+            </div>
 
-<div class="card">
-<h3>Regularly Updated</h3>
-<p>
-The spreadsheet is updated periodically with the newest information.
-</p>
-</div>
+            <div class="card">
+                <h3 class="en">Regularly Updated</h3>
+                <h3 class="fi">Säännöllisesti päivitetty</h3>
+                
+                <p class="en">
+                    The spreadsheet is updated periodically with the newest information.
+                </p>
+                <p class="fi">
+                    Laskentataulukkoa päivitetään säännöllisesti uusimmalla tiedolla.
+                </p>
+            </div>
 
-<div class="card">
-<h3>Free Access</h3>
-<p>
-No registration required. Simply click and download.
-</p>
-</div>
+            <div class="card">
+                <h3 class="en">Free Access</h3>
+                <h3 class="fi">Ilmainen käyttö</h3>
+                
+                <p class="en">
+                    No registration required. Simply click and download.
+                </p>
+                <p class="fi">
+                    Ei vaadi rekisteröitymistä. Napsauta vain ja lataa.
+                </p>
+            </div>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
 </div>
 
 <section class="download">
 
-<h2>Download the Vegan Cheat sheet</h2>
+    <h2 class="en">Download the Vegan Cheat sheet</h2>
+    <h2 class="fi">Lataa vegaaninen muistilista</h2>
 
-<p style="margin-bottom:30px;">
-Click the button below to download the latest version.
-</p>
+    <p class="en" style="margin-bottom:30px;">
+        Click the button below to download the latest version.
+    </p>
+    <p class="fi" style="margin-bottom:30px;">
+        Lataa uusin versio napsauttamalla alla olevaa painiketta.
+    </p>
 
-<a href="Vegan starter guide.xlsx" download>
-<button>Download Vegan Cheat sheet</button>
-</a>
+    <a href="Vegan starter guide.xlsx" download style="text-decoration: none;">
+        <button class="en">Download Vegan Cheat sheet</button>
+        <button class="fi">Lataa vegaaninen muistilista</button>
+    </a>
 
 </section>
 
 <footer>
-
-© 2024 Vegaaninen.Suomi
-© 2024 Vegan_Finland
-Follow us on Instagram  @Vegaaninen.Suomi  @Vegan_Finland
-
+    © 2024 Vegaaninen.Suomi | © 2024 Vegan_Finland<br>
+    Follow us on Instagram: @Vegaaninen.Suomi | @Vegan_Finland
 </footer>
+
+<!-- Language Toggle Script -->
+<script>
+    function setLanguage(lang) {
+        const body = document.body;
+        const btnEn = document.getElementById('btn-en');
+        const btnFi = document.getElementById('btn-fi');
+
+        if (lang === 'fi') {
+            body.classList.remove('lang-en');
+            body.classList.add('lang-fi');
+            btnEn.classList.remove('active');
+            btnFi.classList.add('active');
+            document.documentElement.lang = 'fi'; // Updates the HTML lang attribute for accessibility
+        } else {
+            body.classList.remove('lang-fi');
+            body.classList.add('lang-en');
+            btnFi.classList.remove('active');
+            btnEn.classList.add('active');
+            document.documentElement.lang = 'en';
+        }
+    }
+</script>
 
 </body>
 </html>
